@@ -590,17 +590,21 @@ class DrawApp:
 
 # --- Launch ---
 if __name__ == "__main__":
+    # Expanded initial labels to include lowercase letters
     initial_labels_list = (
-        ['circle','square','triangle']
-        + [str(i) for i in range(10)]
-        # + [chr(i) for i in range(ord('A'),ord('Z')+1)] # Add letters for more classes
+        ['circle', 'square', 'triangle']                 # Shapes
+        + [str(i) for i in range(10)]                    # Numbers 0-9
+        + [chr(i) for i in range(ord('A'), ord('Z') + 1)] # Uppercase A-Z
+        + [chr(i) for i in range(ord('a'), ord('z') + 1)] # Lowercase a-z
     )
-    # initial_labels_list = [] # To start completely fresh
+    # initial_labels_list = [] # To start completely fresh if no predefined labels are desired
 
     root = tk.Tk()
     root.title(f"📓 Drawing Learner (CNN v{APP_VERSION})")
-    root.geometry("950x700") # Adjusted window size
+    root.geometry("950x700")
     
-    app = DrawApp(root, initial_labels=initial_labels_list, required=5) # required per class for initial phase
+    # MODIFICATION: Set required=1 for the initial collection phase
+    # This means the app will ask for 1 example of each item in initial_labels_list
+    app = DrawApp(root, initial_labels=initial_labels_list, required=1) 
     
     root.mainloop()
